@@ -21,5 +21,5 @@ zip:
 	@echo "Created zip file: " $(ZIP_FILE)	
 	
 clean:
-	 -rm -f *.o *.d App
+	 -rm -f *.o *.d $(APP_PATH)App
 #	 -rm -rf $(ZIP_FILE)
