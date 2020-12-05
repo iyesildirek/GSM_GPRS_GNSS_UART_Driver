@@ -1,6 +1,6 @@
 # Makefile 
 CC=g++
-CPPFLAGS=-c -pedantic -Wall -Wfatal-errors -Wextra -Wno-unused-parameter -Wno-unused-variable
+CPPFLAGS= -pedantic -Wall -lpthread -lrt -Wfatal-errors -Wextra -Wunused-variable -Wunused-parameter
 SIM_PATH = /home/ismail/Documents/GSM_driver/SIM868
 ZIP_FILE = App.zip
 COLLECTED_FILES = SIM868.h SIM868.cpp main.cpp
@@ -11,7 +11,7 @@ APP_PATH = Application/
 all: main.o #zip
 
 main.o: 
-	g++ $(APP_PATH)main.cpp $(SIM868INC) $(SIM868LIB) -o $(APP_PATH)App 
+	g++ $(APP_PATH)main.cpp $(CPPFLAGS) $(SIM868INC) $(SIM868LIB) -o $(APP_PATH)App 
 
 zip:
 	@echo "Removing any previous version of zip file..."
