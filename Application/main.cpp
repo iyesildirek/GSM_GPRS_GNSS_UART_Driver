@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <sys/sysinfo.h>
 #include <unistd.h>
+#include <syslog.h>
 #include "SIM868.h"
 
 //--------------DEFINITIONS-----------------------//
@@ -55,9 +56,16 @@ void *phone
 //---------FUNCTION DECLARATIONS-----------------------// 
 int main(void)
 {
+	//Initialize Syslog 
+	openlog("GSM-App", LOG_PID, LOG_USER);
+	
 	//Initialize pThreads
-	initThreads();	 		 
+	initThreads();	 
 
+	//Close log
+	closelog();
+	
+	//Exit program
 	pthread_exit(NULL);
 	return OK;
 }
@@ -112,7 +120,7 @@ void initThreads(void)
 	{
 		pthread_join(threads[i], NULL);
 	}
-	//syslog(LOG_CRIT, "All threads for GSM GPRS started!");
+	syslog(LOG_INFO, "All threads for GSM GPRS started!");
 	cout << "TEST COMPLETE" << endl;
 	//sem_destroy(&mySemaphore;);
 }
